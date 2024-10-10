@@ -1,0 +1,13 @@
+define j = j b b~
+define l = l+ l-
+define v = vl vl~
+generate e+ e- > j j 
+output background_qq
+launch
+set nevents 500
+set iseed 34188
+set lpp1 0
+set lpp2 0
+set ebeam1 120
+set ebeam2 120
+set sde_strategy 1
