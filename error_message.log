@@ -1,0 +1,28 @@
+input_line_20:2:79: error: use of undeclared identifier 'thy'
+  ...*x){ return (TMath::Abs({thy})>2.56)*(0.000)+(x[0]<0.1)*(...
+                              ^
+input_line_20:2:123: error: use of undeclared identifier 'thy'
+  ...thy})<=2.56)*(0.000)+(x[0]>=0.1)*(TMath::Abs({thy})<=2.56...
+     ^
+input_line_20:2:169: error: use of undeclared identifier 'thy'
+  ...thy})<=2.56)*(1.000) ; }
+     ^
+input_line_21:2:79: error: use of undeclared identifier 'thy'
+  ...*x){ return (TMath::Abs({thy})>2.56)*(0.000)+(x[0]<0.1)*(...
+                              ^
+input_line_21:2:123: error: use of undeclared identifier 'thy'
+  ...thy})<=2.56)*(0.000)+(x[0]>=0.1)*(TMath::Abs({thy})<=2.56...
+     ^
+input_line_21:2:169: error: use of undeclared identifier 'thy'
+  ...thy})<=2.56)*(1.000) ; }
+     ^
+Error in <prepareMethod>: Can't compile function TFormula____id14201534285391615475 prototype with arguments Double_t*
+Error in <TFormula::InputFormulaIntoCling>: Error compiling formula expression in Cling
+Error in <TFormula::ProcessFormula>: "thy" has not been matched in the formula expression
+Error in <TFormula::ProcessFormula>: "thy" has not been matched in the formula expression
+Error in <TFormula::ProcessFormula>: "thy" has not been matched in the formula expression
+Error in <TFormula::ProcessFormula>: Formula "(abs(thy)>2.56)*(0.000)+(x<0.1)*(abs(thy)<=2.56)*(0.000)+(x>=0.1)*(abs(thy)<=2.56)*(1.000)" is invalid !
+** ERROR: Invalid formula.
+------------------------------------------------------------------------
+
+Pythia8 Cross-section: 0.0000000 pb
