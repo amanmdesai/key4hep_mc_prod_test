@@ -154,9 +154,9 @@ module Efficiency ChargedHadronTrackingEfficiency {
     set UseMomentumVector true
 
     set EfficiencyFormula {
-        (abs(theta) > 2.56)                                  * (0.000) +
-        (pt < 0.1) * (abs(theta) <= 2.56)       * (0.000) +
-        (pt >= 0.1) * (abs(theta) <= 2.56)      * (1.000)
+        (abs(eta) > 2.56)                                  * (0.000) +
+        (pt < 0.1) * (abs(eta) <= 2.56)       * (0.000) +
+        (pt >= 0.1) * (abs(eta) <= 2.56)      * (1.000)
     }
 }
 
@@ -172,9 +172,9 @@ module Efficiency ElectronTrackingEfficiency {
     set UseMomentumVector true
 
     set EfficiencyFormula {
-        (abs(theta) > 2.56)                                  * (0.000) +
-        (pt < 0.1) * (abs(theta) <= 2.56)                    * (0.000) +
-        (pt >= 0.1) * (abs(theta) <= 2.56)                   * (1.000)
+        (abs(eta) > 2.56)                                  * (0.000) +
+        (pt < 0.1) * (abs(eta) <= 2.56)                    * (0.000) +
+        (pt >= 0.1) * (abs(eta) <= 2.56)                   * (1.000)
     }
 }
 
@@ -189,9 +189,9 @@ module Efficiency MuonTrackingEfficiency {
     set UseMomentumVector true
 
     set EfficiencyFormula {
-        (abs(theta) > 2.56)                                  * (0.000) +
-        (pt < 0.1) * (abs(theta) <= 2.56)       * (0.000) +
-        (pt >= 0.1) * (abs(theta) <= 2.56)      * (1.000)
+        (abs(eta) > 2.56)                                  * (0.000) +
+        (pt < 0.1) * (abs(eta) <= 2.56)       * (0.000) +
+        (pt >= 0.1) * (abs(eta) <= 2.56)      * (1.000)
     }
 }
 
@@ -428,7 +428,7 @@ module TimeSmearing TimeSmearing {
 
   # assume constant 30 ps resolution for now
   set TimeResolution {
-                       (abs(theta) > 0.0 && abs(theta) <= 3.0)* 30E-12
+                       (abs(eta) > 0.0 && abs(eta) <= 3.0)* 30E-12
                      }
 }
 
@@ -470,10 +470,10 @@ module Efficiency ForwardLooperTracks  {
   set OutputArray tracks
   set UseMomentumVector False
 
-  ## select looping tracks that end up in position |theta| > 3.142 (lost by calo)
+  ## select looping tracks that end up in position |eta| > 3.142 (lost by calo)
   set EfficiencyFormula {
-    (abs(theta) > 3.0 )                                 * (1.000) +
-    (abs(theta) <= 3.0 )                                * (0.000)
+    (abs(eta) > 3.0 )                                 * (1.000) +
+    (abs(eta) <= 3.0 )                                * (0.000)
   }
 
 }
@@ -502,19 +502,19 @@ module DualReadoutCalorimeter Calorimeter {
   #set SmearTowerCenter false
     set pi [expr {acos(-1)}]
 
-    # Lists of the edges of each tower in theta and phi;
+    # Lists of the edges of each tower in eta and phi;
     # each list starts with the lower edge of the first tower;
     # the list ends with the higher edged of the last tower.
-    # Barrel:  dtheta=0.02 towers up to |theta| <= 0.88 ( up to 45°)
-    # Endcaps: dtheta=0.02 towers up to |theta| <= 3.0 (8.6° = 100 mrad)
+    # Barrel:  deta=0.02 towers up to |eta| <= 0.88 ( up to 45°)
+    # Endcaps: deta=0.02 towers up to |eta| <= 3.0 (8.6° = 100 mrad)
     # Cell size: about 6 cm x 6 cm
 
-    set thetaPhiRes 0.02
-    set thetaMax 3.0
+    set EtaPhiRes 0.02
+    set EtaMax 3.0
 
     set pi [expr {acos(-1)}]
 
-    set nbins_phi [expr {$pi/$thetaPhiRes} ]
+    set nbins_phi [expr {$pi/$EtaPhiRes} ]
     set nbins_phi [expr {int($nbins_phi)} ]
 
     set PhiBins {}
@@ -522,12 +522,12 @@ module DualReadoutCalorimeter Calorimeter {
       add PhiBins [expr {$i * $pi/$nbins_phi}]
     }
 
-    set nbins_theta [expr {$thetaMax/$thetaPhiRes} ]
-    set nbins_theta [expr {int($nbins_theta)} ]
+    set nbins_eta [expr {$EtaMax/$EtaPhiRes} ]
+    set nbins_eta [expr {int($nbins_eta)} ]
 
-    for {set i -$nbins_theta} {$i <= $nbins_theta} {incr i} {
-      set theta [expr {$i * $thetaPhiRes}]
-      add thetaPhiBins $theta $PhiBins
+    for {set i -$nbins_eta} {$i <= $nbins_eta} {incr i} {
+      set eta [expr {$i * $EtaPhiRes}]
+      add EtaPhiBins $eta $PhiBins
     }
 
     # default energy fractions {abs(PDG code)} {Fecal Fhcal}
@@ -553,18 +553,18 @@ module DualReadoutCalorimeter Calorimeter {
 
 
     ## ECAL crystals for the EM part from 2008.00338
-    # set ECalResolutionFormula {resolution formula as a function of theta and energy}
+    # set ECalResolutionFormula {resolution formula as a function of eta and energy}
     set ECalResolutionFormula {
-    (abs(theta) <= 0.88 )                     * sqrt(energy^2*0.005^2 + energy*0.03^2 + 0.002^2)+
-    (abs(theta) > 0.88 && abs(theta) <= 3.0)    * sqrt(energy^2*0.005^2 + energy*0.03^2 + 0.002^2)
+    (abs(eta) <= 0.88 )                     * sqrt(energy^2*0.005^2 + energy*0.03^2 + 0.002^2)+
+    (abs(eta) > 0.88 && abs(eta) <= 3.0)    * sqrt(energy^2*0.005^2 + energy*0.03^2 + 0.002^2)
     }
 
 
     # Dual Readout
-    # set HCalResolutionFormula {resolution formula as a function of theta and energy}
+    # set HCalResolutionFormula {resolution formula as a function of eta and energy}
     set HCalResolutionFormula {
-    (abs(theta) <= 0.88 )                     * sqrt(energy^2*0.01^2 + energy*0.3^2 + 0.05^2)+
-    (abs(theta) > 0.88 && abs(theta) <= 3.0)    * sqrt(energy^2*0.01^2 + energy*0.3^2 + 0.05^2)
+    (abs(eta) <= 0.88 )                     * sqrt(energy^2*0.01^2 + energy*0.3^2 + 0.05^2)+
+    (abs(eta) > 0.88 && abs(eta) <= 3.0)    * sqrt(energy^2*0.01^2 + energy*0.3^2 + 0.05^2)
     }
 }
 
@@ -578,7 +578,7 @@ module TimeSmearing TimeSmearingNeutrals {
 
   # assume constant 30 ps resolution for now
   set TimeResolution {
-                       (abs(theta) > 0.0 && abs(theta) <= 3.0)* 30E-12
+                       (abs(eta) > 0.0 && abs(eta) <= 3.0)* 30E-12
                      }
 }
 
@@ -647,13 +647,13 @@ module Efficiency PhotonEfficiency {
   set InputArray Calorimeter/eflowPhotons
   set OutputArray photons
 
-  # set EfficiencyFormula {efficiency formula as a function of theta and pt}
+  # set EfficiencyFormula {efficiency formula as a function of eta and pt}
   # efficiency formula for photons
   set EfficiencyFormula {
         (energy < 2.0)                                        * (0.000)+
-        (energy >= 2.0) * (abs(theta) <= 0.88)                  * (0.99) +
-        (energy >= 2.0) * (abs(theta) >0.88 && abs(theta) <= 3.0) * (0.99) +
-        (abs(theta) > 3.0)                                      * (0.000)
+        (energy >= 2.0) * (abs(eta) <= 0.88)                  * (0.99) +
+        (energy >= 2.0) * (abs(eta) >0.88 && abs(eta) <= 3.0) * (0.99) +
+        (abs(eta) > 3.0)                                      * (0.000)
   }
 }
 
@@ -707,14 +707,14 @@ module Efficiency ElectronEfficiency {
   set InputArray ElectronFilter/electrons
   set OutputArray electrons
 
-  # set EfficiencyFormula {efficiency formula as a function of theta and pt}
+  # set EfficiencyFormula {efficiency formula as a function of eta and pt}
 
   # efficiency formula for electrons
   set EfficiencyFormula {
         (energy < 2.0)                                         * (0.000)+
-        (energy >= 2.0) * (abs(theta) <= 0.88)                   * (0.99) +
-        (energy >= 2.0) * (abs(theta) >0.88 && abs(theta) <= 3.0)  * (0.99) +
-        (abs(theta) > 3.0)                                       * (0.000)
+        (energy >= 2.0) * (abs(eta) <= 0.88)                   * (0.99) +
+        (energy >= 2.0) * (abs(eta) >0.88 && abs(eta) <= 3.0)  * (0.99) +
+        (abs(eta) > 3.0)                                       * (0.000)
   }
 }
 
@@ -743,14 +743,14 @@ module Efficiency MuonEfficiency {
   set InputArray MuonFilter/muons
   set OutputArray muons
 
-  # set EfficiencyFormula {efficiency as a function of theta and pt}
+  # set EfficiencyFormula {efficiency as a function of eta and pt}
 
   # efficiency formula for muons
   set EfficiencyFormula {
         (energy < 2.0)                                         * (0.000)+
-        (energy >= 2.0) * (abs(theta) <= 0.88)                   * (0.99) +
-        (energy >= 2.0) * (abs(theta) >0.88 && abs(theta) <= 3.0)  * (0.99) +
-        (abs(theta) > 3.0)                                       * (0.000)
+        (energy >= 2.0) * (abs(eta) <= 0.88)                   * (0.99) +
+        (energy >= 2.0) * (abs(eta) >0.88 && abs(eta) <= 3.0)  * (0.99) +
+        (abs(eta) > 3.0)                                       * (0.000)
   }
 }
 
@@ -816,7 +816,7 @@ module FastJetFinder GenJetFinderDurhamN2 {
   # to run exclusive dcut mode set DCut to float
   # if DCut > 0 will run in dcut mode
 
-  set Jthetalgorithm 11
+  set JetAlgorithm 11
   set ExclusiveClustering true
   set NJets 2
   # set DCut 10.0
@@ -838,7 +838,7 @@ module FastJetFinder FastJetFinderDurhamN2 {
   # to run exclusive dcut mode set DCut to float
   # if DCut > 0 will run in dcut mode
 
-  set Jthetalgorithm 11
+  set JetAlgorithm 11
   set ExclusiveClustering true
   set NJets 2
   # set DCut 10.0
@@ -856,7 +856,7 @@ module FastJetFinder GenJetFinder {
   set InputArray NeutrinoFilter/filteredParticles
   set OutputArray jets
 
-  set Jthetalgorithm 10
+  set JetAlgorithm 10
   set ParameterR 1.5
   set ParameterP -1.0
   set JetPTMin 1.0
@@ -885,7 +885,7 @@ module FastJetFinder FastJetFinder {
   set OutputArray jets
 
   # algorithm: 1 CDFJetClu, 2 MidPoint, 3 SIScone, 4 kt, 5 Cambridge/Aachen, 6 antikt
-  set Jthetalgorithm 10
+  set JetAlgorithm 10
   set ParameterR 1.5
   set ParameterP -1.0
   set JetPTMin 1.0
@@ -918,7 +918,7 @@ module JetFlavorAssociation JetFlavorAssociation {
 
   set DeltaR 0.5
   set PartonPTMin 1.0
-  set PartonthetaMax 3.0
+  set PartonEtaMax 3.0
 }
 
 ###########
@@ -930,7 +930,7 @@ module BTagging BTagging {
 
   set BitNumber 0
 
-  # add EfficiencyFormula {abs(PDG code)} {efficiency formula as a function of theta and pt}
+  # add EfficiencyFormula {abs(PDG code)} {efficiency formula as a function of eta and pt}
 
   # default efficiency formula (misidentification rate)
   add EfficiencyFormula {0} {0.005}
@@ -951,7 +951,7 @@ module BTagging CTagging {
 
   set BitNumber 1
 
-  # add EfficiencyFormula {abs(PDG code)} {efficiency formula as a function of theta and pt}
+  # add EfficiencyFormula {abs(PDG code)} {efficiency formula as a function of eta and pt}
 
   # default efficiency formula (misidentification rate)
   add EfficiencyFormula {0} {0.01}
@@ -975,7 +975,7 @@ module TauTagging TauTagging {
 
   set DeltaR 0.5
   set TauPTMin 1.0
-  set TauthetaMax 3.0
+  set TauEtaMax 3.0
 
   # default efficiency formula (misidentification rate)
   add EfficiencyFormula {0} {0.01}
