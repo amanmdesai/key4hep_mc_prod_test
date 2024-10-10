@@ -1,28 +1,47 @@
-input_line_20:2:79: error: use of undeclared identifier 'thy'
-  ...*x){ return (TMath::Abs({thy})>2.56)*(0.000)+(x[0]<0.1)*(...
-                              ^
-input_line_20:2:123: error: use of undeclared identifier 'thy'
-  ...thy})<=2.56)*(0.000)+(x[0]>=0.1)*(TMath::Abs({thy})<=2.56...
-     ^
-input_line_20:2:169: error: use of undeclared identifier 'thy'
-  ...thy})<=2.56)*(1.000) ; }
-     ^
-input_line_21:2:79: error: use of undeclared identifier 'thy'
-  ...*x){ return (TMath::Abs({thy})>2.56)*(0.000)+(x[0]<0.1)*(...
-                              ^
-input_line_21:2:123: error: use of undeclared identifier 'thy'
-  ...thy})<=2.56)*(0.000)+(x[0]>=0.1)*(TMath::Abs({thy})<=2.56...
-     ^
-input_line_21:2:169: error: use of undeclared identifier 'thy'
-  ...thy})<=2.56)*(1.000) ; }
-     ^
-Error in <prepareMethod>: Can't compile function TFormula____id14201534285391615475 prototype with arguments Double_t*
-Error in <TFormula::InputFormulaIntoCling>: Error compiling formula expression in Cling
-Error in <TFormula::ProcessFormula>: "thy" has not been matched in the formula expression
-Error in <TFormula::ProcessFormula>: "thy" has not been matched in the formula expression
-Error in <TFormula::ProcessFormula>: "thy" has not been matched in the formula expression
-Error in <TFormula::ProcessFormula>: Formula "(abs(thy)>2.56)*(0.000)+(x<0.1)*(abs(thy)<=2.56)*(0.000)+(x>=0.1)*(abs(thy)<=2.56)*(1.000)" is invalid !
-** ERROR: Invalid formula.
-------------------------------------------------------------------------
+input_line_135:2:50: error: 'MissingET' does not refer to a value
+auto func7(){return ReconstructedParticle::get_p(MissingET)
+                                                 ^
+libClassesDict dictionary forward declarations' payload:15:77: note: declared here
+class __attribute__((annotate("$clingAutoload$classes/DelphesClasses.h")))  MissingET;
+                                                                            ^
+input_line_139:2:50: error: 'MissingET' does not refer to a value
+auto func7(){return ReconstructedParticle::get_p(MissingET)
+                                                 ^
+libClassesDict dictionary forward declarations' payload:15:77: note: declared here
+class __attribute__((annotate("$clingAutoload$classes/DelphesClasses.h")))  MissingET;
+                                                                            ^
+Traceback (most recent call last):
+  File "/cvmfs/sw.hsf.org/key4hep/releases/2024-10-03/x86_64-almalinux9-gcc14.2.0-opt/fccanalyses/0.10.0-ff5ila/bin/fccanalysis", line 105, in <module>
+    main()
+  File "/cvmfs/sw.hsf.org/key4hep/releases/2024-10-03/x86_64-almalinux9-gcc14.2.0-opt/fccanalyses/0.10.0-ff5ila/bin/fccanalysis", line 101, in main
+    run(parser)
+  File "/cvmfs/sw.hsf.org/key4hep/releases/2024-10-03/x86_64-almalinux9-gcc14.2.0-opt/fccanalyses/0.10.0-ff5ila/python/run_analysis.py", line 1024, in run
+    run_stages(args, rdf_module, anapath)
+  File "/cvmfs/sw.hsf.org/key4hep/releases/2024-10-03/x86_64-almalinux9-gcc14.2.0-opt/fccanalyses/0.10.0-ff5ila/python/run_analysis.py", line 693, in run_stages
+    run_local(rdf_module, chunk_list[0], args)
+  File "/cvmfs/sw.hsf.org/key4hep/releases/2024-10-03/x86_64-almalinux9-gcc14.2.0-opt/fccanalyses/0.10.0-ff5ila/python/run_analysis.py", line 527, in run_local
+    inn, outn = run_rdf(rdf_module, file_list, outfile_path, args)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/sw.hsf.org/key4hep/releases/2024-10-03/x86_64-almalinux9-gcc14.2.0-opt/fccanalyses/0.10.0-ff5ila/python/run_analysis.py", line 332, in run_rdf
+    dframe3 = get_element(rdf_module.RDFanalysis, "analysers")(dframe2)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/eos/home-a/aman/test_key4hep/analysis_stage1.py", line 29, in analysers
+    .Define("MissingP", "ReconstructedParticle::get_p(MissingET)") 
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/sw.hsf.org/key4hep/releases/2024-10-03/x86_64-almalinux9-gcc14.2.0-opt/root/6.32.04-vms5ij/lib/ROOT/_pythonization/_rdf_pyz.py", line 372, in _PyDefine
+    return rdf._OriginalDefine(col_name, callable_or_str)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Template method resolution failed:
+  ROOT::RDF::RInterface<ROOT::Detail::RDF::RLoopManager,void> ROOT::RDF::RInterface<ROOT::Detail::RDF::RLoopManager,void>::Define(string_view name, string_view expression) =>
+    runtime_error: 
+RDataFrame: An error occurred during just-in-time compilation. The lines above might indicate the cause of the crash
+ All RDF objects that have not run an event loop yet should be considered in an invalid state.
 
-Pythia8 Cross-section: 0.0000000 pb
+  ROOT::RDF::RInterface<ROOT::Detail::RDF::RLoopManager,void> ROOT::RDF::RInterface<ROOT::Detail::RDF::RLoopManager,void>::Define(string_view name, string_view expression) =>
+    runtime_error: 
+RDataFrame: An error occurred during just-in-time compilation. The lines above might indicate the cause of the crash
+ All RDF objects that have not run an event loop yet should be considered in an invalid state.
+
+  Failed to instantiate "Define(ROOT::RDF::RInterface<ROOT::Detail::RDF::RLoopManager,void>&,std::string,std::string)"
+  Failed to instantiate "Define(ROOT::RDF::RInterface<ROOT::Detail::RDF::RLoopManager,void>*,std::string,std::string)"
+  Failed to instantiate "Define(ROOT::RDF::RInterface<ROOT::Detail::RDF::RLoopManager,void>,std::string,std::string)"
